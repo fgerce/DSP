@@ -60,4 +60,9 @@ plt.legend(loc='upper right')
 plt.grid()
 plt.xlabel("Frecuencia")
 plt.ylabel("Amplitud")
-plt.xlim(240,260)
+plt.xlim(245.5,255.5)
+
+e0 = ((ww0[ins.get_max_index(modulo0)[0]] - f0) / f0) * 100
+e1 = ((ww1[ins.get_max_index(modulo1)[0]] - f0) / f0) * 100
+e2 = ((ww2[ins.get_max_index(modulo2)[0]] - f0) / f0) * 100
+e3 = ((ww3[ins.get_max_index(modulo3)[0]] - f0) / f0) * 100
