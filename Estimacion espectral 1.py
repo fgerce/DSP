@@ -36,11 +36,6 @@ modulo2, fase2, ww2 = ins.analizador_espectro(signal2, fs)
 modulo3, fase3, ww3 = ins.analizador_espectro(signal3, fs)
 
 
-#sum0 = np.sum(np.power(np.delete(modulo0, 250),2))
-#sum1 = np.sum(np.power(np.delete(modulo1, 250),2))
-#sum2 = np.sum(np.power(np.delete(modulo2, 250),2))
-#sum3 = np.sum(np.power(np.delete(modulo3, 250),2))
-
 sum0 = ins.sumatoria_modulo_cuadrado(np.delete(modulo0, 250))
 sum1 = ins.sumatoria_modulo_cuadrado(np.delete(modulo1, 250))
 sum2 = ins.sumatoria_modulo_cuadrado(np.delete(modulo2, 250))
