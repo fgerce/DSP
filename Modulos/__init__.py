@@ -1,7 +1,7 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug 22 16:18:35 2019
+Created on ...
 
-@author: IVAN.GERCENSZTEIN
+@author: ...
 """
-
