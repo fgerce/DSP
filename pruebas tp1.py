@@ -43,38 +43,38 @@ sum3 = ins.sumatoria_modulo_cuadrado(np.delete(modulo3, 250))
 
 
 
-#x0,y0 = ins.get_max_index(modulo0)
-#x1,y1 = ins.get_max_index(modulo1)
-#x2,y2 = ins.get_max_index(modulo2)
-#x3,y3 = ins.get_max_index(modulo3)
+x0,y0 = ins.get_max_index(modulo0)
+x1,y1 = ins.get_max_index(modulo1)
+x2,y2 = ins.get_max_index(modulo2)
+x3,y3 = ins.get_max_index(modulo3)
 
 
 
-#plt.figure("Analizador espectro")
-#
-#plt.subplot(2,1,1)
-#plt.title("Modulo y fase señal")
-#
-#plt.plot(ww0, modulo0, label='fs/4')
-#plt.plot(ww1, modulo1, label='+ 0.1')
-#plt.plot(ww2, modulo2, label='+ 0.25')
-#plt.plot(ww3, modulo3, label='+ 0.5')
-#
-#plt.legend(loc='upper right')
-#plt.grid()
-#plt.xlabel("Frecuencia")
-#plt.ylabel("Amplitud")
-#
-#plt.subplot(2,1,2)
-#plt.xlabel("Frecuencia")
-#plt.ylabel("Fase")
-#plt.plot(ww0, fase0, "co", label='fs/4')
-#plt.plot(ww1, fase1, "go", label='+ 0.1')
-#plt.plot(ww2, fase2, "bo", label='+ 0.25')
-#plt.plot(ww3, fase3, "ro", label='+ 0.5')
-#plt.legend(loc='upper right')
-#plt.grid()
-#plt.tight_layout()
+plt.figure("Analizador espectro")
+
+plt.subplot(2,1,1)
+plt.title("Modulo y fase señal")
+
+plt.plot(ww0, modulo0, label='fs/4')
+plt.plot(ww1, modulo1, label='+ 0.1')
+plt.plot(ww2, modulo2, label='+ 0.25')
+plt.plot(ww3, modulo3, label='+ 0.5')
+
+plt.legend(loc='upper right')
+plt.grid()
+plt.xlabel("Frecuencia")
+plt.ylabel("Amplitud")
+
+plt.subplot(2,1,2)
+plt.xlabel("Frecuencia")
+plt.ylabel("Fase")
+plt.plot(ww0, fase0, "co", label='fs/4')
+plt.plot(ww1, fase1, "go", label='+ 0.1')
+plt.plot(ww2, fase2, "bo", label='+ 0.25')
+plt.plot(ww3, fase3, "ro", label='+ 0.5')
+plt.legend(loc='upper right')
+plt.grid()
+plt.tight_layout()
 
 
 

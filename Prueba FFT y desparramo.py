@@ -3,13 +3,13 @@
 """
 Created on Wed Aug 28 21:06:34 2019
 
-@author: IVAN.GERCENSZTEIN
+@author: fede
 """
 from Modulos import instrumentos as ins
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 N  = 1000 # muestras
 fs = 1000 # Hz
@@ -37,16 +37,31 @@ plt.xlabel('Tiempo [t]')
 plt.ylabel('Amplitud [V]')
 plt.title("Señal: Senoidal")
 """
+modulo0, fase0, ww0 = ins.analizador_espectro(signal0, fs)
+modulo1, fase1, ww1 = ins.analizador_espectro(signal1, fs)
+modulo2, fase2, ww2 = ins.analizador_espectro(signal2, fs)
+modulo3, fase3, ww3 = ins.analizador_espectro(signal3, fs)
+
+f0_0 = 20*np.log10(modulo0[int(f0)])
+f0_1 = 20*np.log10(modulo1[int(f0)])
+f0_2 = 20*np.log10(modulo2[int(f0)])
+f0_3 = 20*np.log10(modulo3[int(f0)])
+
+fady_0 = 20*np.log10(modulo0[int(f0+1)])
+fady_1 = 20*np.log10(modulo1[int(f0+1)])
+fady_2 = 20*np.log10(modulo2[int(f0+1)])
+fady_3 = 20*np.log10(modulo3[int(f0+1)])
+
+sum_resto_frecuencias0 = ins.sumatoria_modulo_cuadrado(modulo0) - modulo0[int(f0)]
+sum_resto_frecuencias1 = ins.sumatoria_modulo_cuadrado(modulo1) - modulo1[int(f0)]
+sum_resto_frecuencias2 = ins.sumatoria_modulo_cuadrado(modulo2) - modulo2[int(f0)]
+sum_resto_frecuencias3 = ins.sumatoria_modulo_cuadrado(modulo3) - modulo3[int(f0)]
+
 
 plt.figure("Analizador espectro")
 
 plt.subplot(2,1,1)
 plt.title("Modulo y fase señal")
-
-modulo0, fase0, ww0 = ins.analizador_espectro(signal0, fs)
-modulo1, fase1, ww1 = ins.analizador_espectro(signal1, fs)
-modulo2, fase2, ww2 = ins.analizador_espectro(signal2, fs)
-modulo3, fase3, ww3 = ins.analizador_espectro(signal3, fs)
 
 plt.plot(ww0, modulo0, label='fs')
 plt.plot(ww1, modulo1, label='+ 0.1')

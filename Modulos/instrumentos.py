@@ -3,7 +3,7 @@
 """
 Created on Wed Aug 21 22:30:10 2019
 
-@author: IVAN.GERCENSZTEIN
+@author: fede
 """
 import numpy as np
 
@@ -12,7 +12,6 @@ def analizador_espectro(signal, fs):
     lim = int(np.floor(N/2))
     complexArray = np.fft.fft(signal)
     modulo = np.abs(complexArray)/lim
-#    modulo = 20*np.log10(np.abs(complexArray)/lim)
     fase = np.angle(complexArray, True)
     ww = np.linspace(0,(N-1)*fs/N, N)
     return modulo[0:lim], fase[0:lim], ww[0:lim]
@@ -47,11 +46,11 @@ def generador_senoidal (fs, f0, N, a0=1, p0=0):
 def generador_ruido(mu, sigma, N):
        return np.random.normal(mu, sigma, N)
 
-def get_max_index(vec):
+def get_max_point(vec):
        index = np.where(vec == max(vec))
        return index[0], max(vec)
 
-def linear2db(vec):
+def vec2db(vec):
        vec = 20*np.log10(vec)
        return vec
 
@@ -59,3 +58,9 @@ def sumatoria_modulo_cuadrado(vec):
        vec = np.abs(vec)
        vec = np.sum(np.power(vec,2))
        return vec
+
+def get_energy(vec):
+       N = vec.shape[0]
+       vec = np.abs(vec)
+       res = np.sum(np.power(vec,2))/N
+       return res
