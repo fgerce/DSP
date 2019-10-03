@@ -1,0 +1,1 @@
+El error máximo de estimación espectral usando la ventana rectangular es de 1/2 resolución espectral!!

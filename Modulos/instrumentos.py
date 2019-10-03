@@ -19,7 +19,6 @@ def analizador_espectro(signal, fs):
 
 def generador_senoidal (fs, f0, N, a0=1, p0=0):
     """ 
-    
     brief:  Generador de señales senoidal, con argumentos
     
     fs:     frecuencia de muestreo de la señal [Hz]
@@ -38,9 +37,7 @@ def generador_senoidal (fs, f0, N, a0=1, p0=0):
     Ts = 1/fs
     tt = np.linspace(0, (N-1)*Ts, N)
     signal = a0*np.sin(2*np.pi*f0*tt+p0)
-    
     # fin de la función
-    
     return tt, signal
 
 def generador_ruido(mu, sigma, N):
