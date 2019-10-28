@@ -17,18 +17,20 @@ fs = 1000
 Ts = 1/fs
 
 tt = np.linspace(0, (N-1)*Ts, N)
+d = np.asarray([0.01, 0.25, 0.5])
 
-f1 = fs/4
-f2 = f1 + (10*fs/N)
+f1 = fs/4 + (d*fs/N)
+f2 = [fs/4 + (10*fs/N), fs/4 + (10*fs/N), fs/4 + (10*fs/N)]
 
-a2 = 10**(-250/20)
+a2dB = -28
+a2 = 10**(a2dB/20)
 
-x1 = np.sin(2*np.pi*f1*tt)
-x2 = a2*np.sin(2*np.pi*f2*tt)
+x1 = np.transpose(np.vstack([np.sin(2*np.pi*fi*tt) for fi in f1]))
+x2 = np.transpose(np.vstack([a2*np.sin(2*np.pi*fi*tt) for fi in f2]))
 
 x = x1 + x2
 
-X = fft(x)
+X = fft(x, axis=0)
 modX = np.abs(fftshift(X))*2/N
 center = int(np.floor(N/2))
 modX = modX[center:N]
@@ -36,5 +38,9 @@ modX = 20*np.log10(modX)
 freq = np.linspace(0, 0.5, len(modX))
 plt.figure("Modulo bitonal", figsize=(10,10))
 plt.plot(freq, modX)
+plt.grid()
 plt.xlabel("Frecuencia normalizada")
 plt.ylabel("Amplitud en dB")
+plt.title("Desintonias en bitonal")
+plt.xlim(0.22,0.28)
+plt.legend(d, title="Desintonías")
