@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct 23 21:05:35 2019
+Created on Sun Dec  1 18:15:33 2019
 
 @author: fede
 """
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,12 +16,12 @@ fs = 1000
 Ts = 1/fs
 
 tt = np.linspace(0, (N-1)*Ts, N)
-d = np.asarray([0.01, 0.25, 0.5])
+d = np.array([0.01, 0.25, 0.5])
 
 f1 = fs/4 + (d*fs/N)
 f2 = [fs/4 + (10*fs/N), fs/4 + (10*fs/N), fs/4 + (10*fs/N)]
 
-a2dB = -28
+a2dB = -30
 a2 = 10**(a2dB/20)
 
 x1 = np.transpose(np.vstack([np.sin(2*np.pi*fi*tt) for fi in f1]))
@@ -37,8 +36,6 @@ modX = modX[center:N]
 modX = 20*np.log10(modX)
 freq = np.linspace(0, 0.5, len(modX))
 plt.figure("Modulo bitonal", figsize=(10,10))
-
-
 plt.plot(freq, modX)
 plt.grid()
 plt.xlabel("Frecuencia normalizada")

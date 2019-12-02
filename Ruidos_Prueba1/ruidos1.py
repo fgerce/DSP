@@ -19,7 +19,7 @@ import scipy.signal as sig
 N  = 1000 # muestras
 fs = 1000 # Hz
 
-M = 250 #Repeticiones de montecarlo
+M = 1000 #Repeticiones de montecarlo
 
 u = 0
 sigma = 2

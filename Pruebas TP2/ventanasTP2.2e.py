@@ -5,7 +5,6 @@ Created on Mon Oct 28 00:24:33 2019
 
 @author: fede
 """
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.signal as sig
@@ -17,31 +16,125 @@ Ts = 1/fs
 
 tt = np.linspace(0, (N-1)*Ts, N)
 
-ventana = sig.flattop(N)
+ventanas = [1, sig.boxcar(N), sig.bartlett(N), sig.hann(N), sig.blackman(N), sig.flattop(N)]
 
-daux = np.asarray([1, 1, 1])
-d = np.asarray([0.8, 0.9, 1])
-f1 = fs/4 + daux*0.5*fs/N
+##Rect
+d = 2.8
+f1 = fs/4 + 0.5*fs/N
 f2 = f1 + d*(fs/N)
-
 a2 = 1
-
-x1 = np.transpose(np.vstack([np.sin(2*np.pi*fi*tt) for fi in f1]))
-x2 = np.transpose(np.vstack([a2*np.sin(2*np.pi*fi*tt) for fi in f2]))
-
+x1 = np.sin(2*np.pi*f1*tt)
+x2 = a2*np.sin(2*np.pi*f2*tt)
 x = x1 + x2
-for aux in range(len(d)):
-       x[:,aux] = x[:,aux] * ventana
-
-X = fft(x, axis=0)
+xw = x * sig.boxcar(N)
+X = fft(xw)
 modX = np.abs(fftshift(X))*2/N
 center = int(np.floor(N/2))
 modX = modX[center:N]
 modX = 20*np.log10(modX)
 freq = np.linspace(0, 0.5, len(modX))
-plt.figure("Modulo bitonal", figsize=(10,10))
-plt.plot(freq, modX)
+plt.figure("Rectangular")
+plt.title("Rectangular")
+plt.plot(freq, modX, label=d)
 plt.grid()
 plt.xlim(0.248,0.28)
 plt.xlabel("Frecuencia normalizada")
 plt.ylabel("Amplitud en dB")
+plt.legend()
+
+##Rect
+d = 2.3
+f1 = fs/4 + 0.5*fs/N
+f2 = f1 + d*(fs/N)
+a2 = 1
+x1 = np.sin(2*np.pi*f1*tt)
+x2 = a2*np.sin(2*np.pi*f2*tt)
+x = x1 + x2
+xw = x * sig.bartlett(N)
+X = fft(xw)
+modX = np.abs(fftshift(X))*2/N
+center = int(np.floor(N/2))
+modX = modX[center:N]
+modX = 20*np.log10(modX)
+freq = np.linspace(0, 0.5, len(modX))
+plt.figure("Bartlett")
+plt.title("Bartlett")
+plt.plot(freq, modX, label=d)
+plt.grid()
+plt.xlim(0.248,0.28)
+plt.xlabel("Frecuencia normalizada")
+plt.ylabel("Amplitud en dB")
+plt.legend()
+
+
+##Hann
+d = 2.5
+f1 = fs/4 + 0.5*fs/N
+f2 = f1 + d*(fs/N)
+a2 = 1
+x1 = np.sin(2*np.pi*f1*tt)
+x2 = a2*np.sin(2*np.pi*f2*tt)
+x = x1 + x2
+xw = x * sig.hann(N)
+X = fft(xw)
+modX = np.abs(fftshift(X))*2/N
+center = int(np.floor(N/2))
+modX = modX[center:N]
+modX = 20*np.log10(modX)
+freq = np.linspace(0, 0.5, len(modX))
+plt.figure("Hann")
+plt.title("Hann")
+plt.plot(freq, modX, label=d)
+plt.grid()
+plt.xlim(0.248,0.28)
+plt.xlabel("Frecuencia normalizada")
+plt.ylabel("Amplitud en dB")
+plt.legend()
+
+##Blackman
+d = 2.5
+f1 = fs/4 + 0.5*fs/N
+f2 = f1 + d*(fs/N)
+a2 = 1
+x1 = np.sin(2*np.pi*f1*tt)
+x2 = a2*np.sin(2*np.pi*f2*tt)
+x = x1 + x2
+xw = x * sig.blackman(N)
+X = fft(xw)
+modX = np.abs(fftshift(X))*2/N
+center = int(np.floor(N/2))
+modX = modX[center:N]
+modX = 20*np.log10(modX)
+freq = np.linspace(0, 0.5, len(modX))
+plt.figure("Blackman")
+plt.title("Blackman")
+plt.plot(freq, modX, label=d)
+plt.grid()
+plt.xlim(0.248,0.28)
+plt.xlabel("Frecuencia normalizada")
+plt.ylabel("Amplitud en dB")
+plt.legend()
+
+##Flattop
+d = 2.8
+f1 = fs/4 + 0.5*fs/N
+f2 = f1 + d*(fs/N)
+a2 = 1
+x1 = np.sin(2*np.pi*f1*tt)
+x2 = a2*np.sin(2*np.pi*f2*tt)
+x = x1 + x2
+xw = x * sig.flattop(N)
+X = fft(xw)
+modX = np.abs(fftshift(X))*2/N
+center = int(np.floor(N/2))
+modX = modX[center:N]
+modX = 20*np.log10(modX)
+freq = np.linspace(0, 0.5, len(modX))
+plt.figure("Flat Top")
+plt.title("Flat Top")
+plt.plot(freq, modX, label=d)
+plt.grid()
+plt.xlim(0.248,0.28)
+plt.xlabel("Frecuencia normalizada")
+plt.ylabel("Amplitud en dB")
+plt.legend()
