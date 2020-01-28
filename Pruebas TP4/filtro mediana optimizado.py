@@ -31,3 +31,11 @@ plt.plot(ecg_one_lead, label="Original")
 plt.plot(sustr, label="Filtrada con medianas")
 plt.title("Comparativa señal original y con filtro de mediana")
 plt.legend()
+
+freqX, Xw = sig.welch(diff,fs=1000)
+acum = np.cumsum(Xw)
+
+aux = (acum < 0.99*acum[-1])
+Xw = 20*np.log10(Xw)
+plt.plot(freqX, Xw)
+
