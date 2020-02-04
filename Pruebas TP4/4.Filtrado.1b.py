@@ -43,6 +43,7 @@ plt.grid(which='both', axis='both')
 axes_hdl = plt.gca()
 axes_hdl.legend()
 plt.show()
+plt.tight_layout()
 
 tf = control.TransferFunction(num,den, 1)
 print (tf)

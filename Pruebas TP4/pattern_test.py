@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 28 16:10:06 2020
+Created on Tue Jan 28 18:29:14 2020
 
 @author: fede
 """
@@ -18,18 +18,15 @@ import scipy.io as sio
 fs = 1000
 mat_struct = sio.loadmat('ECG_TP4.mat')
 
-ecg_one_lead = mat_struct['ecg_lead']
-ecg_one_lead = ecg_one_lead.flatten()
-ecg_one_lead = ecg_one_lead[1000:60000]
-cant_muestras = len(ecg_one_lead)
+ecg_pattern = mat_struct['qrs_pattern1']
+ecg_pattern = ecg_pattern.flatten()
+cant_muestras = len(ecg_pattern)
 
-K = 10 #Bloques de welch
-L = cant_muestras/K
-freqS, welchS = sig.welch(ecg_one_lead, fs,nperseg=L,window='bartlett')
+freqS, welchS = sig.welch(ecg_pattern, fs,window='bartlett')
 welchS = 20*np.log10(welchS)
 
 plt.figure(1)
-plt.plot(ecg_one_lead)
+plt.plot(ecg_pattern)
 plt.xlabel('# muestra')
 plt.ylabel('Amplitud')
 plt.grid()
@@ -38,5 +35,12 @@ plt.figure(2)
 plt.plot(freqS, welchS)
 plt.xlabel('Frecuencia  [Hz]')
 plt.ylabel('Amplitud [dB]')
-plt.xlim(30, 120)
+plt.grid()
+
+plt.figure(3)
+plt.plot(freqS, welchS)
+plt.xlabel('Frecuencia  [Hz]')
+plt.ylabel('Amplitud [dB]')
+plt.xlim(0,50)
+plt.ylim(60,125)
 plt.grid()
