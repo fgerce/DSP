@@ -18,10 +18,20 @@ mat_struct = sio.loadmat('ECG_TP4.mat')
 
 ecg_one_lead = mat_struct['ecg_lead']
 QRS_det = mat_struct['qrs_detections']
+QRS_det = QRS_det.flatten()
 ecg_one_lead = ecg_one_lead.flatten()
+clean_ecg = ecg_one_lead.flatten()
 cant_muestras = len(ecg_one_lead)
 
-plt.vlines(QRS_det[0:6]-35,-15000, 15000, colors='red', ls='dotted')
+for i in range (0,len(QRS_det)-1):
+       start = QRS_det[i] - 120
+       stop = QRS_det[i] - 35
+       next_s = QRS_det[i+1] - 120
+       seg1 = np.mean(ecg_one_lead[start:stop])
+       ecg_one_lead[start:next_s] = ecg_one_lead[start:next_s] - seg1
 
-plt.vlines(QRS_det[0:6]-120,-15000, 15000, colors='black', ls='dotted')
-plt.plot(ecg_one_lead[0:5000])
+plt.vlines(QRS_det-35,-35000, 35000, colors='red', ls='dotted')
+plt.vlines(QRS_det-120,-35000, 35000, colors='black', ls='dotted')
+
+plt.plot(ecg_one_lead)
+plt.plot(clean_ecg)
