@@ -16,7 +16,7 @@ from time import time
 mat_struct = sio.loadmat('ECG_TP4.mat')
 
 ecg_one_lead = mat_struct['ecg_lead']
-ecg_one_lead = ecg_one_lead.flatten(1)
+ecg_one_lead = ecg_one_lead.flatten()
 cant_muestras = len(ecg_one_lead)
 
 start_time = time()
